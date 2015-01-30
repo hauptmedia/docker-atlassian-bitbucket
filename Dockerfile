@@ -1,4 +1,4 @@
-FROM		hauptmedia/java:7
+FROM		hauptmedia/java:oracle-java7
 MAINTAINER	Julian Haupt <julian.haupt@hauptmedia.de>
 
 ENV		STASH_VERSION 3.6.1
