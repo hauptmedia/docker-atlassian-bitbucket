@@ -10,22 +10,27 @@ ENV		STASH_INSTALL_DIR	/opt/atlassian/stash
 ENV		RUN_USER            daemon
 ENV		RUN_GROUP           daemon
 
-ADD		http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-${STASH_VERSION}.tar.gz /tmp/
-ADD		http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MYSQL_CONNECTOR_J_VERSION}.tar.gz /tmp/
-ADD		docker-entrypoint.sh /tmp/
+ENV             DEBIAN_FRONTEND noninteractive
 
-RUN		apt-get update -qq && \
-    		apt-get install -y --no-install-recommends git && \
-		apt-get clean autoclean && \
-		apt-get autoremove --yes && \
-		rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
-		mkdir -p ${STASH_INSTALL_DIR} && \
-		tar -xzf /tmp/atlassian-stash-${STASH_VERSION}.tar.gz --strip=1 -C ${STASH_INSTALL_DIR} && \
-		tar -xzf /tmp/mysql-connector-java-${MYSQL_CONNECTOR_J_VERSION}.tar.gz --strip=1 -C /tmp/ && \
-		cp /tmp/mysql-connector-java-${MYSQL_CONNECTOR_J_VERSION}-bin.jar ${STASH_INSTALL_DIR}/lib && \
-		mv /tmp/docker-entrypoint.sh ${STASH_INSTALL_DIR}/bin && \
-		chown -R ${RUN_USER}:${RUN_GROUP} ${STASH_INSTALL_DIR} && \
-		rm -rf /tmp/*
+# install needed debian packages & clean up
+RUN             apt-get update && \
+                apt-get install -y --no-install-recommends curl tar xmlstarlet ca-certificates git && \
+                apt-get clean autoclean && \
+                apt-get autoremove --yes && \
+                rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+# download and extract stash
+RUN             mkdir -p ${STASH_INSTALL_DIR} && \
+                curl -L --silent http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-${STASH_VERSION}.tar.gz | tar -xz --strip=1 -C ${STASH_INSTALL_DIR} && \
+                chown -R ${RUN_USER}:${RUN_GROUP} ${STASH_INSTALL_DIR}
+
+# integrate mysql connector j library
+RUN             curl -L --silent http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MYSQL_CONNECTOR_J_VERSION}.tar.gz | tar -xz --strip=1 -C /tmp && \
+                cp /tmp/mysql-connector-java-${MYSQL_CONNECTOR_J_VERSION}-bin.jar ${STASH_INSTALL_DIR}/lib && \
+                rm -rf /tmp/*
+
+# add docker-entrypoint.sh script
+COPY            docker-entrypoint.sh ${STASH_INSTALL_DIR}/bin/
 
 USER		${RUN_USER}:${RUN_GROUP}	
 
