@@ -1,7 +1,7 @@
-FROM		hauptmedia/java:oracle-java7
+FROM		hauptmedia/java:oracle-java8
 MAINTAINER	Julian Haupt <julian.haupt@hauptmedia.de>
 
-ENV		STASH_VERSION 3.6.1
+ENV		STASH_VERSION 3.10.0
 ENV		MYSQL_CONNECTOR_J_VERSION 5.1.34
 
 ENV		STASH_HOME     		/var/atlassian/application-data/stash
