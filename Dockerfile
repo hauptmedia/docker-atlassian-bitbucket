@@ -1,7 +1,7 @@
 FROM		hauptmedia/java:oracle-java8
 MAINTAINER	Julian Haupt <julian.haupt@hauptmedia.de>
 
-ENV		STASH_VERSION 3.10.0
+ENV		STASH_VERSION 4.0.4
 ENV		MYSQL_CONNECTOR_J_VERSION 5.1.34
 
 ENV		STASH_HOME     		/var/atlassian/application-data/stash
@@ -21,7 +21,7 @@ RUN             apt-get update && \
 
 # download and extract stash
 RUN             mkdir -p ${STASH_INSTALL_DIR} && \
-                curl -L --silent http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-${STASH_VERSION}.tar.gz | tar -xz --strip=1 -C ${STASH_INSTALL_DIR} && \
+                curl -L --silent http://www.atlassian.com/software/stash/downloads/binary/atlassian-bitbucket-${STASH_VERSION}.tar.gz | tar -xz --strip=1 -C ${STASH_INSTALL_DIR} && \
                 chown -R ${RUN_USER}:${RUN_GROUP} ${STASH_INSTALL_DIR}
 
 # integrate mysql connector j library
