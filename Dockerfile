@@ -45,4 +45,4 @@ VOLUME		["${STASH_INSTALL_DIR}"]
 WORKDIR		${STASH_INSTALL_DIR}
 
 ENTRYPOINT	["bin/docker-entrypoint.sh"]
-CMD		["bin/start-stash.sh", "-fg"]
+CMD		["bin/start-bitbucket.sh", "-fg"]
