@@ -1,2 +1,2 @@
 build:
-	docker build -t="hauptmedia/atlassian-stash" .
+	docker build -t="hauptmedia/atlassian-bitbucket" .
