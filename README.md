@@ -1,6 +1,6 @@
-# docker-atlassian-stash
+# docker-atlassian-bitbucket
 
-A docker image for Stash.
+A docker image for Bitbucket.
 
 ## Features
 
