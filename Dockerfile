@@ -1,8 +1,8 @@
 FROM		hauptmedia/java:oracle-java8
 MAINTAINER	Julian Haupt <julian.haupt@hauptmedia.de>
 
-ENV		BITBUCKET_VERSION 4.14.3
-ENV		MYSQL_CONNECTOR_J_VERSION 5.1.34
+ENV		BITBUCKET_VERSION 5.8.0 
+ENV		MYSQL_CONNECTOR_J_VERSION 5.1.45
 
 ENV		BITBUCKET_HOME     	/var/atlassian/application-data/bitbucket
 ENV		BITBUCKET_INSTALL_DIR	/opt/atlassian/bitbucket
