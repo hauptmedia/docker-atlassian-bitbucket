@@ -8,5 +8,3 @@ RUN             curl -L http://dev.mysql.com/get/Downloads/Connector-J/mysql-con
                 cp /tmp/mysql-connector-java-${MYSQL_CONNECTOR_J_VERSION}/mysql-connector-java-${MYSQL_CONNECTOR_J_VERSION}-bin.jar /opt/atlassian/bitbucket/lib && \
                 rm -rf /tmp/*
 
-COPY entrypoint.sh              /entrypoint.sh
-
