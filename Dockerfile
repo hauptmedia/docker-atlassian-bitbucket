@@ -1,4 +1,4 @@
-FROM		atlassian/bitbucket-server:5.8.0
+FROM		atlassian/bitbucket-server:5.12.0
 MAINTAINER	Julian Haupt <julian.haupt@hauptmedia.de>
 
 ENV		MYSQL_CONNECTOR_J_VERSION 5.1.45
